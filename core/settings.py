@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "graphene_django",
-    "app"
+    "authentication"
 
 ]
 
@@ -124,9 +124,12 @@ STATIC_URL = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+# Custom user model
+AUTH_USER_MODEL = "authentication.User"
+
 # Graphene settings
 GRAPHENE = {
-    'SCHEMA': 'app.schema.schema',  # You will create this schema file later
+    'SCHEMA': 'authentication.schema.schema',  # You will create this schema file later
     'MIDDLEWARE': [
         'graphql_jwt.middleware.JSONWebTokenMiddleware',
     ],
