@@ -24,6 +24,7 @@ This backend provides a GraphQL API for authentication and AI-powered coaching s
 - `verifyToken(token)`: Verify a JWT token
 - `askCoach(question, tagNames)`: Ask a question, get an AI response, and save the session
 - `askOpenrouter(prompt, tagNames)`: Same as askCoach, but with a generic prompt field
+- `registerUser(username, password, email, firstName, lastName)`: Register a new user
 
 ## Example Queries
 
@@ -91,6 +92,21 @@ mutation {
   askOpenrouter(prompt: "What is AI?", tagNames: ["technology"]) {
     response
     sessionId
+  }
+}
+```
+
+### Register a new user
+```graphql
+mutation {
+  registerUser(username: "newuser", password: "securepassword", email: "user@example.com", firstName: "New", lastName: "User") {
+    user {
+      id
+      username
+      email
+    }
+    success
+    errors
   }
 }
 ```
