@@ -147,7 +147,7 @@ class TagType(DjangoObjectType):
 class UserType(DjangoObjectType):
     class Meta:
         model = User
-        fields = ("id", "username", "email")
+        fields = "__all__"
 
 # Queries
 class Query(graphene.ObjectType):
@@ -166,7 +166,9 @@ class Query(graphene.ObjectType):
         return User.objects.get(pk=id)
 
     def resolve_me(root, info):
-        user = info.context.user
+        user: User = info.context.user
+
+        print(f"Resolving 'me' for user: {user.first_name} {user.last_name} (ID: {user.id})")
         if user.is_authenticated:
             return user
         return None
