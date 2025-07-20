@@ -287,6 +287,9 @@ class RegisterUser(graphene.Mutation):
             first_name=first_name or "",
             last_name=last_name or ""
         )
+
+        
+
         user.set_password(password)
         user.save()
         return RegisterUser(user=user, success=True, errors=None)

@@ -28,7 +28,7 @@ SECRET_KEY = "django-insecure-8tp==33ys4jv(k4scf)+o9tnq+3f6#jmi_i01w#ge0570jch#-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -45,9 +45,11 @@ INSTALLED_APPS = [
     "authentication",
     "coaching",
     'django_filters',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -149,3 +151,37 @@ AUTHENTICATION_BACKENDS = [
 # OpenRouter API Key
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 OPENROUTER_MODEL = "moonshotai/kimi-k2:free"
+
+# CORS settings
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+# CORS_ALLOW_ALL_ORIGINS = True
+
+# Also add these additional CORS settings for GraphQL
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+CORS_ALLOW_CREDENTIALS = True
+CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
+
+# CSRF settings
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+
+# Disable CSRF for GraphQL endpoint
+CSRF_COOKIE_SECURE = False
+CSRF_COOKIE_HTTPONLY = False

@@ -4,3 +4,4 @@ django-graphql-jwt
 openai
 python-dotenv
 django-filter
+corsheadersdjango-cors-headers
